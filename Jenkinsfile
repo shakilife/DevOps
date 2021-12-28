@@ -30,6 +30,7 @@ pipeline {
              aws ec2 describe-instances
              git version
              pwd ; ls -ltr
+             cd /home/jenkins/agent/workspace/git-clone && python3 list_user.py
           '''
           }
       }
