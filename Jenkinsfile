@@ -29,7 +29,7 @@ pipeline {
              aws ec2 describe-vpcs
              aws ec2 describe-instances
              git version
-             pwd
+             pwd ; ls -ltr
           '''
           }
       }
