@@ -28,6 +28,7 @@ pipeline {
              python3 --version
              aws ec2 describe-vpcs
              aws ec2 describe-instances
+             git version
           '''
           }
       }
