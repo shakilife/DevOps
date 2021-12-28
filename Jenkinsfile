@@ -29,6 +29,7 @@ pipeline {
              aws ec2 describe-vpcs
              aws ec2 describe-instances
              git version
+             cd Devops && python3 list_user.py
           '''
           }
       }
