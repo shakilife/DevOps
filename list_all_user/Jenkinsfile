@@ -19,7 +19,7 @@ pipeline {
     AWS_DEFAULT_REGION="us-east-1"
   }
   stages {
-    stage('Check version') {
+    stage('List All The IAM Users') {
       steps {
         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh '''
