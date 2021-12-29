@@ -23,7 +23,6 @@ pipeline {
       steps {
         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh '''
-             pwd ; ls -ltr
              cd /home/jenkins/agent/workspace/aws/git-clone/list_all_user && python3 list_user.py
           '''
           }
