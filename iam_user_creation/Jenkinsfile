@@ -27,6 +27,7 @@ pipeline {
       steps {
         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh '''
+             pwd ; ls -ltr
              cd /home/jenkins/agent/workspace/aws/iam_creation && bash iam_creation.sh $USER_NAME $ARN
           '''
 
