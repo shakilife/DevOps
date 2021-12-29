@@ -1,5 +1,5 @@
 parameters {
-    string(name: "USER_NAME", defaultValue: "Andy", description: "Entry the name to create IAM user"),
+    string(name: "USER_NAME", defaultValue: "Andy", description: "Entry the name to create IAM user")
     string(name: "ARN", defaultValue: "arn:aws:iam::aws:policy/AmazonEC2FullAccess", description: "Please provide policy ARN to grant access")
 }
 
