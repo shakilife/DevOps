@@ -1,4 +1,3 @@
-properties([parameters([string(description: 'user name to create user on aws iam', name: 'USER_NAME')])])
 properties([parameters([string(description: 'please put ARN of any policy which you want to give access to user', name: 'ARN')])])
 
 
