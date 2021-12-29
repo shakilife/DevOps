@@ -1,3 +1,7 @@
+properties([parameters([string(description: 'user name to create user on aws iam', name: 'USER_NAME')])])
+properties([parameters([string(description: 'please put ARN of any policy which you want to give access to user', name: 'ARN')])])
+
+
 pipeline {
   agent {
     kubernetes {
@@ -8,7 +12,7 @@ pipeline {
         spec:
           containers:
           - name: jenkins-slave-general
-            image: shakilife/awsagent:v1.2
+            image: shakilife/awsagent:v1.1
             command:
             - cat
             tty: true
@@ -23,9 +27,9 @@ pipeline {
       steps {
         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh '''
-             pwd ; ls -ltr
-             cd /home/jenkins/agent/workspace/git-clone/list_all_user && python3 list_user.py
+             cd /home/jenkins/agent/workspace/aws/iam_creation && bash iam_creation.sh $USER_NAME $ARN
           '''
+
           }
       }
     }

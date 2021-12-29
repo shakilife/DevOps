@@ -1,9 +1,10 @@
 #! /bin/bash
 
 # AWS cli command to create IAM user
-aws iam create-user --user-name ${user}
+$1 $2
+aws iam create-user --user-name $1
 
-aws iam create-login-profile --user-name ${user} --password Welcome123 --password-reset-required
+aws iam create-login-profile --user-name $1 --password Welcome123 --password-reset-required
 
-aws iam attach-user-policy --user-name=${user} --policy-arn=${ARN}
+aws iam attach-user-policy --user-name=$1 --policy-arn=$2
 
