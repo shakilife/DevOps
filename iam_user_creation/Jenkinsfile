@@ -1,3 +1,5 @@
+properties([parameters([string(description: 'Provide name to create IAM user with default password welcome123', name: 'USER_NAME'), string(description: 'Provide policy ARN to give access to IAM user', name: 'ARN')])])
+
 pipeline {
   agent {
     kubernetes {
@@ -18,17 +20,18 @@ pipeline {
     environment {
     AWS_DEFAULT_REGION="us-east-1"
   }
-  stages {
-    stage('Stage to Create AWS IAM User') {
-      steps {
-        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-          sh '''
-             pwd ; ls -ltr
-             cd /home/jenkins/agent/workspace/aws/iam_creation/iam_user_creation && bash iam_creation.sh $USER_NAME $ARN
-          '''
-
+  stages{
+      stage('Git Clone') {
+          steps {
+              git branch: 'main', url: 'https://github.com/shakilife/DevOps'
           }
       }
-    }
+      stage('Create IAM user') {
+          steps {
+             withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+              sh 'cd /home/jenkins/agent/workspace/aws/test/iam_user_creation && bash iam_creation.sh $USER_NAME $ARN'
+             }
+          }
+      }
   }
-}
+  }
