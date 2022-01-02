@@ -1,0 +1,43 @@
+properties([parameters([string(description: 'List of user to create as IAM user on AWS account with default password Welcome', name: 'USER_NAMES'), string(description: 'Creating group to manage IAM user permissions', name: 'GROUP_NAME'), string(description: 'Provide access ARN to attached to Group', name: 'ARN')])])
+
+pipeline {
+  agent {
+    kubernetes {
+      defaultContainer 'jenkins-slave-general'
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: jenkins-slave-general
+            image: shakilife/awsagent:v1.2
+            command:
+            - cat
+            tty: true
+        '''
+    }
+  }
+    environment {
+    AWS_DEFAULT_REGION="us-east-1"
+  }
+  stages{
+      stage('Git Clone') {
+          steps {
+              git branch: 'main', url: 'https://github.com/shakilife/DevOps'
+          }
+      }
+      stage('Creating User file') {
+          steps {
+              {
+              sh 'echo $USER_NAMES >> users && pwd && ls -ltr'
+             }
+          }
+      stage('Create IAM user') {
+          steps {
+             withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+              sh 'cd /home/jenkins/agent/workspace/aws/MultipleIamUserCreation/MultipleIamUserCreation && bash bulk-create-iam-users.sh $GROUP_NAME $ARN'
+             }
+          }
+      }
+  }
+  }
