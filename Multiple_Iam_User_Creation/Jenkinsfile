@@ -34,7 +34,7 @@ pipeline {
       stage('Create IAM user') {
           steps {
              withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-              sh 'cd /home/jenkins/agent/workspace/aws/MultipleIamUserCreation/Multiple_Iam_User_Creation && bash bulk-create-iam-users.sh $GROUP_NAME $ARN 2>/dev/null'
+              sh 'cd /home/jenkins/agent/workspace/aws/MultipleIamUserCreation/Multiple_Iam_User_Creation && bash bulk-create-iam-users.sh $GROUP_NAME $ARN'
              }
           }
         }

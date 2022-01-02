@@ -17,3 +17,5 @@ do
   aws iam create-login-profile --user-name="$i" --password='Welcome123' --password-reset-required ; \
   aws iam add-user-to-group --user-name "$i" --group-name ${group}`
 done
+
+aws iam list-users --output table
