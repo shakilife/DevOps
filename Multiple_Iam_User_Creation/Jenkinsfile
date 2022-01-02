@@ -38,6 +38,7 @@ pipeline {
               sh 'cd /home/jenkins/agent/workspace/aws/MultipleIamUserCreation/MultipleIamUserCreation && bash bulk-create-iam-users.sh $GROUP_NAME $ARN'
              }
           }
-      }
-  }
+        }
+     }
+    }
   }
