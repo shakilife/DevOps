@@ -28,10 +28,9 @@ pipeline {
       }
       stage('Creating User file') {
           steps {
-              {
               sh 'echo $USER_NAMES >> users && pwd && ls -ltr'
-             }
           }
+            }
       stage('Create IAM user') {
           steps {
              withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
@@ -41,4 +40,3 @@ pipeline {
         }
      }
     }
-  }
