@@ -7,6 +7,7 @@ aws iam list-users --output table
 for i in `cat users`
 do
   `aws iam remove-user-from-group --user-name "$i" --group-name ${group}; \
+  aws iam delete-login-profile --user-name="$i"; \
   aws iam delete-user --user-name "$i"`
 done
 
