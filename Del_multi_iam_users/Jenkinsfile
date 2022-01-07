@@ -31,7 +31,7 @@ pipeline {
               sh 'echo $USER_NAMES >> /home/jenkins/agent/workspace/aws/MultiUserDeletion/Del_multi_iam_users/users && cat /home/jenkins/agent/workspace/aws/MultiUserDeletion/Del_multi_iam_users/users'
           }
             }
-      stage('Create IAM user') {
+      stage('Deleting IAM user') {
           steps {
              withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-auto-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
               sh 'cd /home/jenkins/agent/workspace/aws/MultiUserDeletion/Del_multi_iam_users && bash bulk-delete-iam-users.sh $GROUP_NAME $ARN'
