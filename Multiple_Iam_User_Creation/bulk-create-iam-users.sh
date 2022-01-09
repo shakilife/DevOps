@@ -19,6 +19,6 @@ done
 
 aws iam list-users --output table
 
-aws iam get-group --group-name ${group}
+aws iam get-group --group-name ${group} --output table
 
 #aws iam attach-user-policy --user-name="$i" --policy-arn="$2" ; \
