@@ -14,6 +14,6 @@ access=`aws s3api put-public-access-block --bucket ${bucket_name} --public-acces
 
 ARN=`sed -i "s/shakil/$bucket_name/g" policy.json`
 
-policy=`aws s3api put-bucket-policy --bucket ${bucket_name} --policy file://policy.json
+policy=`aws s3api put-bucket-policy --bucket ${bucket_name} --policy file://policy.json`
 
 return=`sed -i "s/$bucket_name/shakil/g" policy.json`
