@@ -1,0 +1,13 @@
+---
+- name: working with s3
+  hosts: localhost
+  vars_files:
+    - s3_vars 
+
+  tasks:
+    - name: create new s3 bucket
+      aws_s3:
+        bucket: "{{ bucket_name }}"
+        mode: create
+        permission: public-read
+        region: ap-south-1

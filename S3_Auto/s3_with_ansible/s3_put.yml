@@ -1,0 +1,10 @@
+---
+- name: put object in s3 bucket
+  hosts: localhost
+  tasks:
+    - name: backup to s3 bucket
+      aws_s3:
+        bucket: shakilife-demo-bckup-bucket
+        object: site
+        src: /home/shakil/ansible/s3_creation.yaml
+        mode: put

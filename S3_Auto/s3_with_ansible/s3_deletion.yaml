@@ -1,0 +1,12 @@
+---
+- name: delete s3 bucket
+  hosts: localhost
+  vars_files:
+    - s3_vars
+
+  tasks:
+    - name: delete s3 bucket
+      aws_s3:
+        bucket: "{{ bucket_name }}"
+        mode: delete
+        region: ap-south-1
